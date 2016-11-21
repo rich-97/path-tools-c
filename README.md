@@ -14,8 +14,8 @@ int main () {
 
   your_path = parser_path(str);
 
-  printf("basename: %s\n", your_path.basename);
-  printf("extname %s\n", your_path.extname);
+  printf("basename: %s\n", your_path.basename); // index.php
+  printf("extname %s\n", your_path.extname); // .php
   return 0;
 }
 ```
