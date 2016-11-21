@@ -1,4 +1,3 @@
-// this will a lib for paths
 #include "stdlib.h"
 #include "string.h"
 
@@ -15,6 +14,7 @@ path parser_path (char *str) {
   path new_path;
 	// last slash
 	int index_last_sl;
+
   // basename init ...
   int index_basename;
   int c_cmp = 0;
@@ -27,7 +27,6 @@ path parser_path (char *str) {
   }
 
   for (int i = 0; i < len; i++) {
-
     if (str[i] == '/')
       c_cmp++;
 
@@ -36,6 +35,7 @@ path parser_path (char *str) {
       index_basename = i + 1;
       break;
     }
+
   }
 
   // array of characters for copy de basename of path string
@@ -44,6 +44,7 @@ path parser_path (char *str) {
   // array of integers in ascii code for convert a character
   int arr_chr[len - index_basename];
   int c_arr_chr = 0;
+
   for (int i = index_basename; i < len; i++) {
     arr_chr[c_arr_chr] = str[i];
     c_arr_chr++;
@@ -51,7 +52,7 @@ path parser_path (char *str) {
 
   // allocate memory for basename
   basename = (char*) malloc(len - index_basename);
-	
+
 	// transform the integers at characters
   for (int i = 0; i < c_arr_chr; i++)
     strcpy(&basename[i], (char*) &arr_chr[i]);
@@ -59,6 +60,7 @@ path parser_path (char *str) {
 	// init extname ...
 	char *extname;
 	int index_ext;
+
 	for (int i = 0; basename[i] != '\0'; i++) {
 		if (basename[i] == '.')
 			index_ext = i;
@@ -66,9 +68,10 @@ path parser_path (char *str) {
 
 	int arr_ext[strlen(basename) - index_ext];
 	int c_arr_ext = 0;
+
 	for (int i = index_ext; basename[i] != '\0'; i++) {
 		arr_ext[c_arr_ext] = basename[i];
-		c_arr_ext++;	
+		c_arr_ext++;
 	}
 
 	// allocate memory for extname
@@ -79,7 +82,6 @@ path parser_path (char *str) {
 
 	// append extname
 	new_path.extname = extname;
-	
   // append basename
   new_path.basename = basename;
 
