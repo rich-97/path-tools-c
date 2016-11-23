@@ -16,6 +16,7 @@ int main () {
 
   printf("basename: %s\n", your_path.basename); // index.php
   printf("extname %s\n", your_path.extname); // .php
+  printf("extname %s\n", your_path.dirname); // /var/www
   return 0;
 }
 ```
