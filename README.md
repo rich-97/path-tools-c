@@ -11,12 +11,12 @@ int main () {
 
   // struct path
   path your_path;
-
+  
   your_path = parser_path(str);
-
-  printf("basename: %s\n", your_path.basename); // index.php
-  printf("extname %s\n", your_path.extname); // .php
-  printf("extname %s\n", your_path.dirname); // /var/www
+  
+  printf("%s\n", your_path.dirname); // /var/www
+  printf("%s\n", your_path.basename); // index.php
+  printf("%s\n", your_path.extname); // .php
   return 0;
 }
 ```
