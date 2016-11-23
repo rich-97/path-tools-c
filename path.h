@@ -9,13 +9,21 @@ struct struct_path {
 
 typedef struct struct_path path;
 
+void str_copy_int (char *str, int *arr_int, int count) {
+  for (int i = 0; i < count; i++)
+    strcpy(&str[i], (char*) &arr_int[i]);
+}
+
 path parser_path (char *str) {
+  char *basename;
+  char *extname;
+  char *dirname;
   int len = strlen(str);
   path new_path;
-	// last slash
+	// index last slash
 	int index_last_sl;
 
-  // basename init ...
+  /* Parse basename init. */
   int index_basename;
   int c_cmp = 0;
 	// slash counter '/'
@@ -35,11 +43,7 @@ path parser_path (char *str) {
       index_basename = i + 1;
       break;
     }
-
   }
-
-  // array of characters for copy de basename of path string
-  char *basename;
 
   // array of integers in ascii code for convert a character
   int arr_chr[len - index_basename];
@@ -53,37 +57,48 @@ path parser_path (char *str) {
   // allocate memory for basename
   basename = (char*) malloc(len - index_basename);
 
-	// transform the integers at characters
-  for (int i = 0; i < c_arr_chr; i++)
-    strcpy(&basename[i], (char*) &arr_chr[i]);
+	// converts the integers at characters
+  str_copy_int(basename, arr_chr, c_arr_chr);
 
-	// init extname ...
-	char *extname;
+	/* Parse extname init. */
 	int index_ext;
-
-	for (int i = 0; basename[i] != '\0'; i++) {
+  int len_basename = len - index_basename;
+	for (int i = 0; i < len_basename; i++) {
 		if (basename[i] == '.')
 			index_ext = i;
 	}
 
-	int arr_ext[strlen(basename) - index_ext];
+	int arr_ext[len_basename - index_ext];
 	int c_arr_ext = 0;
 
-	for (int i = index_ext; basename[i] != '\0'; i++) {
+	for (int i = index_ext; i < len_basename; i++) {
 		arr_ext[c_arr_ext] = basename[i];
 		c_arr_ext++;
 	}
 
 	// allocate memory for extname
-	extname = (char*) malloc(strlen(basename) - index_ext);
+  extname = (char*) malloc(len_basename - index_ext);
 
-	for (int i = 0; i < c_arr_ext; i++)
-		strcpy(&extname[i], (char*) &arr_ext[i]);
+  // converts de integers at characters
+  str_copy_int(extname, arr_ext, c_arr_ext);
 
-	// append extname
+  /* Parse dirname init. */
+  int arr_dir[index_last_sl];
+  int c_arr_dir = 0;
+
+  for (int i = 0; i < index_last_sl; i++) {
+    arr_dir[c_arr_dir] = str[i];
+    c_arr_dir++;
+  }
+
+  dirname = (char*) malloc(index_last_sl);
+
+  str_copy_int(dirname, arr_dir, c_arr_dir);
+
+	// append to estruct.
 	new_path.extname = extname;
-  // append basename
   new_path.basename = basename;
+  new_path.dirname = dirname;
 
   return new_path;
 }
