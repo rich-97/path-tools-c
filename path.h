@@ -9,6 +9,14 @@ struct struct_path {
 
 typedef struct struct_path path;
 
+/* path absolute */
+int is_absolute (char *str) {
+  if (str[0] == '/')
+    return 1;
+  else
+    return 0;
+}
+
 void str_copy_int (char *str, int *arr_int, int count) {
   for (int i = 0; i < count; i++)
     strcpy(&str[i], (char*) &arr_int[i]);
