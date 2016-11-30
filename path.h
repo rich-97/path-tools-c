@@ -1,6 +1,9 @@
 #include "stdlib.h"
 #include "string.h"
 
+#ifndef PATH_H
+#define PATH_H
+
 struct struct_path {
   char *dirname;
   char *basename;
@@ -110,3 +113,5 @@ path parser_path (char *str) {
 
   return new_path;
 }
+
+#endif
