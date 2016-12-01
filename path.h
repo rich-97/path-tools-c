@@ -1,8 +1,9 @@
-#include "stdlib.h"
-#include "string.h"
 
 #ifndef PATH_H
 #define PATH_H
+
+#include "stdlib.h"
+#include "string.h"
 
 struct struct_path {
   char *dirname;
