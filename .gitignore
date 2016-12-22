@@ -2,3 +2,4 @@
 bin
 tests
 *.gch
+*.swp
