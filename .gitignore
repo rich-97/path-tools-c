@@ -1,5 +1,2 @@
 *.o
-bin
-tests
-*.gch
 *.swp
